@@ -87,7 +87,7 @@ def procesar_medicion():
         except Exception as e:
             print(f"Error al enviar al Arduino: {e}")
 
-# Hilo para hacer mediciones cada 10 segundos
+# Hilo para hacer mediciones cada 4 segundos
 def loop_mediciones():
     while True:
         procesar_medicion()
