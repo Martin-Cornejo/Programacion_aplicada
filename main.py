@@ -108,4 +108,5 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-*pip install flask pyserial
+# -ejecutar esta linea de comandos en la consola
+# pip install flask pyserial
