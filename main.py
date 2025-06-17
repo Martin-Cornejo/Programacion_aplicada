@@ -91,7 +91,7 @@ def procesar_medicion():
 def loop_mediciones():
     while True:
         procesar_medicion()
-        time.sleep(10)
+        time.sleep(4)
 
 threading.Thread(target=loop_mediciones, daemon=True).start()
 
