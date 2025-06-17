@@ -106,3 +106,6 @@ def index():
 # Ejecutar servidor Flask
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+*pip install flask pyserial
