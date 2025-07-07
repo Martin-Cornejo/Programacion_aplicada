@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monitor de Latencia</title>
+    <!-- Favicon integrado -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+    <!-- Estilo básico opcional -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 90%; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        tr:hover { background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>📊 Registros de Latencia</h1>
+    <th> Proyecto de Programacion aplicada</th>
+    <table>
+        <tr>
+            <th>Fecha / Hora</th>
+            <th>Latencia (ms)</th>
+            <th>Estado</th>
+        </tr>
+        {% for registro in registros %}
+        <tr>
+            <td>{{ registro[0] }}</td>
+            <td>{{ registro[1] }}</td>
+            <td>
+                {% if registro[2] == "Baja Latencia" %} ✅ 
+                {% elif registro[2] == "Latencia Moderada" %} ⚠️ 
+                {% else %} ❌ {% endif %}
+                {{ registro[2] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

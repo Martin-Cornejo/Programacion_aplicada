@@ -67,11 +67,11 @@ def procesar_medicion():
         return
 
     if latencia <= 100:
-        estado = "OK"
+        estado = "Baja Latencia"
     elif latencia <= 200:
-        estado = "WARN"
+        estado = "Latencia Moderada"
     else:
-        estado = "BAD"
+        estado = "Latencia Alta"
 
     fecha = time.strftime("%Y-%m-%d %H:%M:%S")
 
