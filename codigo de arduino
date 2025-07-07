@@ -1,0 +1,58 @@
+String estado = "";
+
+const int LED_BAJA = 2;     // Verde
+const int LED_MODERADA = 3; // Amarillo
+const int LED_ALTA = 4;     // Rojo (latencia alta o mensaje inválido)
+
+unsigned long tiempoAnterior = 0;
+bool ledEncendido = false;
+int intervalo = 0;
+int pinActual = -1;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_BAJA, OUTPUT);
+  pinMode(LED_MODERADA, OUTPUT);
+  pinMode(LED_ALTA, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available()) {
+    estado = Serial.readStringUntil('\n');
+    estado.trim(); // elimina espacios y saltos de línea
+
+    // Apagar todos los LEDs antes de decidir
+    digitalWrite(LED_BAJA, LOW);
+    digitalWrite(LED_MODERADA, LOW);
+    digitalWrite(LED_ALTA, LOW);
+
+    // Verificar mensaje válido
+    if (estado == "Baja Latencia") {
+      pinActual = LED_BAJA;
+      intervalo = 100;  // Parpadeo rápido
+    } else if (estado == "Latencia Moderada") {
+      pinActual = LED_MODERADA;
+      intervalo = 250;
+    } else if (estado == "Latencia Alta") {
+      pinActual = LED_ALTA;
+      intervalo = 400;
+    } else {
+      // Mensaje inválido o desconocido → Error → LED rojo
+      pinActual = LED_ALTA;
+      intervalo = 1000; // Parpadeo lento
+    }
+
+    // Reiniciar parpadeo
+    tiempoAnterior = millis();
+    ledEncendido = false;
+  }
+
+  // Parpadeo actual
+  if (pinActual != -1) {
+    if (millis() - tiempoAnterior >= intervalo) {
+      ledEncendido = !ledEncendido;
+      digitalWrite(pinActual, ledEncendido ? HIGH : LOW);
+      tiempoAnterior = millis();
+    }
+  }
+}
