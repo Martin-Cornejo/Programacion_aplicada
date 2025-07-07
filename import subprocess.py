@@ -8,7 +8,7 @@ import os
 
 # Configuración inicial
 CSV_FILE = "registros.csv"
-PUERTO_SERIAL = "COM3"  # Cambia esto si estás en Linux o Mac (ej: '/dev/ttyUSB0')
+PUERTO_SERIAL = "COM13"  # Cambia esto si estás en Linux o Mac (ej: '/dev/ttyUSB0')
 BAUDIOS = 9600
 
 # Inicializar conexión serial con Arduino

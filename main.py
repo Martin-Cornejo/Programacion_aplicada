@@ -9,7 +9,7 @@ import re
 
 # Configuración inicial
 CSV_FILE = "registros.csv"
-PUERTO_SERIAL = "COM3"  # Cambia esto según tu sistema
+PUERTO_SERIAL = "COM13"  # Cambia esto según tu sistema
 BAUDIOS = 9600
 
 # Función para detectar la puerta de enlace predeterminada en Windows
@@ -87,12 +87,11 @@ def procesar_medicion():
         except Exception as e:
             print(f"Error al enviar al Arduino: {e}")
 
-# Hilo para hacer mediciones cada 4 segundos
+# Hilo para hacer mediciones cada 0.5 segundos
 def loop_mediciones():
     while True:
         procesar_medicion()
-        time.sleep(4)
-
+        time.sleep(0.5)
 threading.Thread(target=loop_mediciones, daemon=True).start()
 
 # Ruta web
